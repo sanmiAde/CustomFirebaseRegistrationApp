@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "949187759528",
+    "firebase_url": "https://customfirebaseregistrationapp.firebaseio.com",
+    "project_id": "customfirebaseregistrationapp",
+    "storage_bucket": "customfirebaseregistrationapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949187759528:android:290e7eefbb837c29",
+        "android_client_info": {
+          "package_name": "com.sanmiaderibigbe.customfirebaseregistrationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949187759528-v8hc62l56d8t4g4vvoathsk2hhhjgceu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanmiaderibigbe.customfirebaseregistrationapp",
+            "certificate_hash": "ad7553bdfa5e80ad5b6bf00df241857e2833b4cd"
+          }
+        },
+        {
+          "client_id": "949187759528-n8mebbbo8dcgd74usdf1na11aqoopdve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7sqInQFkiTarudmlIRAWqw4fFgAk0L6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949187759528-n8mebbbo8dcgd74usdf1na11aqoopdve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
