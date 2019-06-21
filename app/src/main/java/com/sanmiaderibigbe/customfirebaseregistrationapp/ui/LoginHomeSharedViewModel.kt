@@ -17,21 +17,19 @@ class LoginHomeSharedViewModel : ViewModel() {
 
     private val TAG: String = "LoginViewModel"
 
+    private val loginResource = MutableLiveData<Resource<AuthenticationState>>()
+
     enum class AuthenticationState {
         AUTHENTICATED,
         UNAUTHENTICATED,
     }
 
-
-    val loginResource = MutableLiveData<Resource<AuthenticationState>>()
-
-
     init {
-        when (firebaseRepository.firebaseAuth.currentUser != null) {
+        when (firebaseRepository.firebaseAuth.currentUser == null) {
 
-            false -> loginResource.value = Resource(Status.LOADED, AuthenticationState.UNAUTHENTICATED, null)
+            true -> loginResource.value = Resource(Status.LOADED, AuthenticationState.UNAUTHENTICATED, null)
 
-            true -> loginResource.value = Resource(Status.LOADED, AuthenticationState.AUTHENTICATED, null)
+            false -> loginResource.value = Resource(Status.LOADED, AuthenticationState.AUTHENTICATED, null)
         }
     }
 
@@ -54,10 +52,10 @@ class LoginHomeSharedViewModel : ViewModel() {
     }
 
     private fun updateAuthenticationState(result: AuthResult) {
-        when (result.user != null) {
-            false -> loginResource.value = Resource(Status.ERROR, AuthenticationState.UNAUTHENTICATED, null)
+        when (result.user == null) {
+            true -> loginResource.value = Resource(Status.ERROR, AuthenticationState.UNAUTHENTICATED, null)
 
-            true -> loginResource.value = Resource(Status.SUCCESS, AuthenticationState.AUTHENTICATED, null)
+            false -> loginResource.value = Resource(Status.SUCCESS, AuthenticationState.AUTHENTICATED, null)
         }
     }
 
