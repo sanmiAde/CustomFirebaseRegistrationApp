@@ -9,6 +9,7 @@ import com.google.firebase.auth.AuthResult
 import com.sanmiaderibigbe.customfirebaseregistrationapp.repo.FirebaseRepository
 import com.sanmiaderibigbe.customfirebaseregistrationapp.repo.Resource
 import com.sanmiaderibigbe.customfirebaseregistrationapp.repo.Status
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 
 class LoginHomeSharedViewModel : ViewModel() {
@@ -37,10 +38,11 @@ class LoginHomeSharedViewModel : ViewModel() {
     fun signIn(email: String, password: String) {
         loginResource.value = Resource(Status.LOADING, AuthenticationState.UNAUTHENTICATED, null)
         firebaseRepository.authenticate(email, password)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onComplete = { Log.d(TAG, "Firebase login task has completed") },
-                onSuccess = { loggedIn: AuthResult -> this::updateAuthenticationState },
-                onError = { throwable: Throwable -> this::updateLoginError }
+                onSuccess = {  authResult: AuthResult? -> updateAuthenticationState(authResult)  },
+                onError = { throwable : Throwable -> updateLoginError(throwable) }
 
             )
 
@@ -51,8 +53,8 @@ class LoginHomeSharedViewModel : ViewModel() {
         return loginResource
     }
 
-    private fun updateAuthenticationState(result: AuthResult) {
-        when (result.user == null) {
+    private fun updateAuthenticationState(result: AuthResult?) {
+        when (result?.user == null) {
             true -> loginResource.value = Resource(Status.ERROR, AuthenticationState.UNAUTHENTICATED, null)
 
             false -> loginResource.value = Resource(Status.SUCCESS, AuthenticationState.AUTHENTICATED, null)
@@ -66,7 +68,6 @@ class LoginHomeSharedViewModel : ViewModel() {
 
     fun signOut() {
         firebaseRepository.signOut()
-
         loginResource.value = Resource(Status.LOADED, AuthenticationState.UNAUTHENTICATED, null)
 
 

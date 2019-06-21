@@ -45,38 +45,23 @@ class HomeFragment : Fragment() {
         viewModels.getLoginResource().observe(viewLifecycleOwner, Observer {
                 loginResource ->
 
-            when(loginResource.status){
-                Status.LOADING -> {
+            when(loginResource.data){
 
-                }
+                    LoginHomeSharedViewModel.AuthenticationState.UNAUTHENTICATED -> {
+                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+                        Toast.makeText(activity, "unauthenticated", Toast.LENGTH_SHORT).show()
+                    }
 
-                Status.LOADED -> {
-                    Toast.makeText(activity, "loaded", Toast.LENGTH_SHORT).show()
+                    LoginHomeSharedViewModel.AuthenticationState.AUTHENTICATED -> {
 
-                    when( loginResource.data) {
-                        LoginHomeSharedViewModel.AuthenticationState.UNAUTHENTICATED -> {
-                            navController.navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-                            Toast.makeText(activity, "unauthenticated", Toast.LENGTH_SHORT).show()
-                        }
-
-                        LoginHomeSharedViewModel.AuthenticationState.AUTHENTICATED -> {
-
-                        }
                     }
                 }
 
-                Status.SUCCESS -> {
+            })
 
-                }
-
-                Status.ERROR -> {
-
-                }
-            }
-        })
+        }
 
 
     }
-}
 
 
