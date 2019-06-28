@@ -1,4 +1,4 @@
-package com.sanmiaderibigbe.customfirebaseregistrationapp.ui
+package com.sanmiaderibigbe.customfirebaseregistrationapp.ui.login
 
 
 import android.os.Bundle
@@ -7,13 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.sanmiaderibigbe.customfirebaseregistrationapp.R
-import com.sanmiaderibigbe.customfirebaseregistrationapp.repo.Status
+import com.sanmiaderibigbe.customfirebaseregistrationapp.ui.login.HomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_home.*
+
+
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : Fragment() {
 
-    private val viewModels: LoginHomeSharedViewModel by activityViewModels()
+    private val viewModels by viewModel<LoginHomeSharedViewModel>()
     private lateinit var  navController : NavController
 
     override fun onCreateView(
@@ -53,7 +55,7 @@ class HomeFragment : Fragment() {
                     }
 
                     LoginHomeSharedViewModel.AuthenticationState.AUTHENTICATED -> {
-
+                        Toast.makeText(activity, "Welcome", Toast.LENGTH_SHORT).show()
                     }
                 }
 

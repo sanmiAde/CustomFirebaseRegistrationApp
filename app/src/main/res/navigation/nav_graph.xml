@@ -5,7 +5,7 @@
             app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/homeFragment"
-              android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.HomeFragment"
+              android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.login.HomeFragment"
               android:label="fragment_home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_homeFragment_to_loginFragment" app:destination="@id/loginFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
@@ -13,6 +13,28 @@
                 app:popUpTo="@+id/homeFragment"/>
     </fragment>
     <fragment android:id="@+id/loginFragment"
-              android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.LoginFragment"
-              android:label="LoginFragment"/>
+              android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.login.LoginFragment"
+              android:label="LoginFragment">
+        <action android:id="@+id/action_loginFragment_to_registrationPersonalFragment"
+                app:destination="@id/navigation2"/>
+    </fragment>
+    <navigation android:id="@+id/navigation2" app:startDestination="@id/registrationPersonalFragment">
+        <fragment android:id="@+id/registrationBankFragment"
+                  android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.registration.RegistrationBankFragment"
+                  android:label="fragment_registration_bank" tools:layout="@layout/fragment_registration_bank">
+            <argument android:name="user" app:argType="com.sanmiaderibigbe.customfirebaseregistrationapp.model.User"/>
+        </fragment>
+        <fragment android:id="@+id/registrationPersonalFragment"
+                  android:name="com.sanmiaderibigbe.customfirebaseregistrationapp.ui.registration.RegistrationPersonalFragment"
+                  android:label="fragment_registration_personal" tools:layout="@layout/fragment_registration_personal">
+            <action android:id="@+id/action_registrationPersonalFragment_to_registrationBankFragment"
+                    app:destination="@id/registrationBankFragment" app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        </fragment>
+        <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popUpTo="@id/navigation2" app:popUpToInclusive="true"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </navigation>
 </navigation>

@@ -82,5 +82,3 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
-
-/src/main/java/com/sanmiaderibigbe/customfirebaseregistrationapp/repo/FirebaseRepository.kt

@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="OR">OR</string>
+    <string name="continue_to_next_screen">CONTINUE</string>
+    <string name="register_with_google">REGISTER</string>
+    <string name="register">REGISTER</string>
 </resources>
